@@ -1,0 +1,33 @@
+@import "tailwindcss";
+
+
+
+.hero {
+  position: relative;
+  height: 70vh;
+  background: url('/apartment.jpg') center/cover no-repeat;
+  display: flex;
+
+}
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+}
+.content {
+  text-align: center;
+  color: white;
+  padding: 0 1rem;
+}
+.title {
+  font-size: 4rem;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+.subtitle {
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+
+
