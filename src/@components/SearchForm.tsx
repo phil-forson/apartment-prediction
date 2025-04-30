@@ -51,7 +51,7 @@ const SearchForm = ({
   return (
     <form
       onSubmit={onSubmit}
-      className="w-auto rounded-full bg-white flex h-auto items-center text-slate-900"
+      className="w-auto rounded-full bg-white flex h-18 items-center text-slate-900"
     >
       <div className="border-r border-[#E2E8F0] py-2 px-4 w-[18rem] flex flex-col">
         <p className=" text-xs px-2 text-slate-900">Bathrooms</p>
@@ -249,7 +249,7 @@ const SearchForm = ({
         </div>
       </div>
       <div className=" px-4 flex flex-col !h-full">
-      <p className=" text-xs text-slate-900 pb-2">Square foot</p>
+      <p className=" text-xs text-slate-900 py-2">Square foot</p>
 
         <div className="">
         <input
