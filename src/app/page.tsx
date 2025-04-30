@@ -3,7 +3,7 @@ import Image from "next/image";
 import apartmentPic from "/apartment.jpg";
 import Select, { SingleValue } from "react-select";
 import SearchForm from "@/@components/SearchForm";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const stateToRegion: { [key: string]: string } = {
   // Northeast
@@ -97,6 +97,17 @@ export default function Home() {
   const [selectedState, setSelectedState] =
     useState<SingleValue<{ label: string; value: string }>>(null);
 
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
   // 3) handle submit (fetch through App Router API)
   const handlePredict = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -137,6 +148,15 @@ export default function Home() {
       setLoading(false);
     }
   };
+
+  if (isMobile) {
+    return (
+      <div className="fixed top-0 left-0 right-0 bg-red-500 text-white p-4 text-center z-50">
+        Mobile devices are not currently supported. Please use a laptop or
+        desktop.
+      </div>
+    );
+  }
   return (
     <>
       <section className="relative hero w-full">
@@ -174,18 +194,26 @@ export default function Home() {
         </div>
       </section>
       {result?.prediction[0] && (
-  <section className="mt-10 px-24 font-semibold py-10 text-lg text-gray-800">
-    <p>
-      Based on your input, the estimated monthly rent for an apartment with{" "}
-      <strong>{bedrooms?.label} {bedrooms?.label === 1 ? "bedroom" : "bedrooms"}</strong>,{" "}
-      <strong>{bathrooms?.label} {bathrooms?.label === 1 ? "bathroom" : "bathrooms"}</strong>, and{" "}
-      <strong>{sqft} square feet</strong> located in <strong>{selectedState?.label}</strong> is:
-    </p>
-    <p className="mt-4 text-2xl text-green-600">
-      ${result.prediction[0].toLocaleString()} / month
-    </p>
-  </section>
-)}
+        <section className="mt-10 px-24 font-semibold py-10 text-lg text-gray-800">
+          <p>
+            Based on your input, the estimated monthly rent for an apartment
+            with{" "}
+            <strong>
+              {bedrooms?.label} {bedrooms?.label === 1 ? "bedroom" : "bedrooms"}
+            </strong>
+            ,{" "}
+            <strong>
+              {bathrooms?.label}{" "}
+              {bathrooms?.label === 1 ? "bathroom" : "bathrooms"}
+            </strong>
+            , and <strong>{sqft} square feet</strong> located in{" "}
+            <strong>{selectedState?.label}</strong> is:
+          </p>
+          <p className="mt-4 text-2xl text-green-600">
+            ${result.prediction[0].toLocaleString()} / month
+          </p>
+        </section>
+      )}
     </>
   );
 }
