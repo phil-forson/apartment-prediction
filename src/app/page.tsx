@@ -169,7 +169,8 @@ export default function Home() {
               Get a data-driven rent prediction in seconds—just tell us your
               number of rooms and square footage.
             </p>
-            <div className="flex justify-center items-center w-full mt-[18rem]">
+            <div className="absolute left-1/2 transform -translate-x-1/2 top-[65vh]
+ flex justify-center items-center w-full ">
               <SearchForm
                 options={options}
                 bathrooms={bathrooms}
