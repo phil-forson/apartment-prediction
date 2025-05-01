@@ -58,7 +58,6 @@ const stateToRegion: { [key: string]: string } = {
   Wyoming: "West",
 };
 
-
 interface Option {
   value: number;
   label: number;
@@ -167,7 +166,7 @@ export default function Home() {
  flex justify-center items-center w-full "
             >
               <SearchForm
-                options={options}
+                options={[...options, { label: 0, value: 0 }]}
                 bathrooms={bathrooms}
                 bedrooms={bedrooms}
                 region={region}
