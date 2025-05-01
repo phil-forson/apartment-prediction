@@ -194,7 +194,7 @@ export default function Home() {
         </div>
       </section>
       {result?.prediction[0] && (
-        <section className="mt-10 px-24 font-semibold py-10 text-lg text-gray-800">
+        <section className="mt-10 px-24 font-semibold py-10 text-lg text-gray-800 text-center">
           <p>
             Based on your input, the estimated monthly rent for an apartment
             with{" "}
@@ -209,9 +209,9 @@ export default function Home() {
             , and <strong>{sqft} square feet</strong> located in{" "}
             <strong>{selectedState?.label}</strong> is:
           </p>
-          <p className="mt-4 text-2xl text-green-600">
+          <span className="text-xl border-l-2 pl-2 w-auto border-green-600">
             ${result.prediction[0].toLocaleString()} / month
-          </p>
+          </span>
         </section>
       )}
     </>
