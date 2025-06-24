@@ -58,7 +58,6 @@ const stateToRegion: { [key: string]: string } = {
   Wyoming: "West",
 };
 
-
 interface Option {
   value: number;
   label: number;
@@ -101,9 +100,17 @@ export default function Home() {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
+  useEffect(() => {
+    if (!bathrooms || !bedrooms || !sqft || !selectedState) {
+      return;
+    }
+    const hitEndpoint = async () => await handlePredict();
+    hitEndpoint();
+  }, [selectedState, bedrooms, bathrooms, sqft, region]);
+
   // 3) handle submit (fetch through App Router API)
-  const handlePredict = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handlePredict = async (e?: React.FormEvent) => {
+    e?.preventDefault();
     setError(null);
     setResult(null);
 
