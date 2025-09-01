@@ -35,7 +35,7 @@
 /* Mobile-specific adjustments */
 @media (max-width: 768px) {
   .hero {
-    height: 80vh;
+    height: 60vh;
     min-height: 600px;
   }
   

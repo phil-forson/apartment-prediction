@@ -163,7 +163,7 @@ export default function Home() {
       <section className="relative hero w-full">
         <div className="overlay">
           <div className="text-white px-4 md:px-24">
-            <h1 className="title mt-64 md:mt-24 font-semibold">
+            <h1 className="title mt-48 md:mt-24 font-semibold">
               Predict rent prices for apartments
             </h1>
             <p className="subtitle">
