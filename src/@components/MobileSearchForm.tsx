@@ -47,7 +47,7 @@ const MobileSearchForm = ({
   return (
     <form
       onSubmit={onSubmit}
-      className="w-96 rounded-xl bg-white shadow-lg flex flex-col text-slate-900 overflow-hidden"
+      className="w-84 rounded-xl bg-white shadow-lg flex flex-col text-slate-900 overflow-hidden"
     >
       <div className="border-b border-[#E2E8F0] py-3 px-4 flex flex-col">
         <p className="text-xs px-2 text-slate-900 mb-1">Bathrooms</p>
