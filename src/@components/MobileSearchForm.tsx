@@ -1,14 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import Select, { SingleValue } from "react-select";
 
 interface Option {
   value: number;
   label: number;
 }
-const options: Option[] = Array.from({ length: 10 }, (_, i) => ({
-  value: i + 1,
-  label: i + 1,
-}));
 
 export interface SearchFormProps {
   options: Option[];
@@ -32,7 +28,7 @@ export interface SearchFormProps {
   onSubmit: (e: React.FormEvent) => void;
 }
 
-const SearchForm = ({
+const MobileSearchForm = ({
   options,
   bathrooms,
   bedrooms,
@@ -51,10 +47,10 @@ const SearchForm = ({
   return (
     <form
       onSubmit={onSubmit}
-      className="w-auto rounded-full bg-white flex h-18 items-center text-slate-900"
+      className="w-96 rounded-xl bg-white shadow-lg flex flex-col text-slate-900 overflow-hidden"
     >
-      <div className="border-r border-[#E2E8F0] py-2 px-4 w-[18rem] flex flex-col">
-        <p className=" text-xs px-2 text-slate-900">Bathrooms</p>
+      <div className="border-b border-[#E2E8F0] py-3 px-4 flex flex-col">
+        <p className="text-xs px-2 text-slate-900 mb-1">Bathrooms</p>
         <div>
           <Select
             options={options}
@@ -118,8 +114,8 @@ const SearchForm = ({
           />
         </div>
       </div>
-      <div className="border-r border-[#E2E8F0] py-2 px-4 w-[18rem]">
-        <p className=" text-xs px-2 text-slate-900">Bedrooms</p>
+      <div className="border-b border-[#E2E8F0] py-3 px-4 flex flex-col">
+        <p className="text-xs px-2 text-slate-900 mb-1">Bedrooms</p>
         <div>
           <Select
             options={[{ label: 0, value: 0 }, ...options]}
@@ -183,9 +179,8 @@ const SearchForm = ({
           />
         </div>
       </div>
-      <div className="border-r border-[#E2E8F0] py-2 px-4 w-[18rem] flex flex-col">
-        <p className=" text-xs px-2  text-slate-900">State</p>
-
+      <div className="border-b border-[#E2E8F0] py-3 px-4 flex flex-col">
+        <p className="text-xs px-2 text-slate-900 mb-1">State</p>
         <div>
           <Select
             options={usStates}
@@ -249,29 +244,27 @@ const SearchForm = ({
           />
         </div>
       </div>
-      <div className=" px-4 flex flex-col !h-full">
-        <p className=" text-xs text-slate-900 py-2">Square foot</p>
-
-        <div className="">
+      <div className="border-b border-[#E2E8F0] py-3 px-4 flex flex-col">
+        <p className="text-xs text-slate-900 mb-1">Square foot</p>
+        <div>
           <input
             type="number"
             placeholder="Enter square footage"
-            className="border-none focus:border-none outline-0"
+            className="w-full border-none focus:border-none outline-0 py-2 px-4 text-sm"
             value={sqft}
             onChange={(e) => onSqftChange(e.target.value)}
             min={100}
           />
         </div>
       </div>
-      <div className="py-1 pr-2">
+      <div className="py-4 px-4 flex items-center justify-center">
         <button
           type="submit"
           disabled={loading}
-          className={`h-9 cursor-pointer w-28 rounded-full text-white ${
+          className={`h-11 cursor-pointer w-full rounded-lg text-white font-medium ${
             loading ? "bg-gray-400" : "bg-black"
           }`}
         >
-          {" "}
           {loading ? "…Loading" : "Calculate Rent"}
         </button>
       </div>
@@ -279,4 +272,4 @@ const SearchForm = ({
   );
 };
 
-export default SearchForm;
+export default MobileSearchForm;

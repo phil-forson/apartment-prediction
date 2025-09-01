@@ -3,6 +3,7 @@ import Image from "next/image";
 import apartmentPic from "/apartment.jpg";
 import Select, { SingleValue } from "react-select";
 import SearchForm from "@/@components/SearchForm";
+import MobileSearchForm from "@/@components/MobileSearchForm";
 import { useState, useEffect } from "react";
 
 const stateToRegion: { [key: string]: string } = {
@@ -89,17 +90,6 @@ export default function Home() {
   const [selectedState, setSelectedState] =
     useState<SingleValue<{ label: string; value: string }>>(null);
 
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
-
   useEffect(() => {
     if (!bathrooms || !bedrooms || !sqft || !selectedState) {
       return;
@@ -149,20 +139,31 @@ export default function Home() {
     }
   };
 
-  if (isMobile) {
-    return (
-      <div className="fixed top-0 left-0 right-0 bg-red-500 text-white p-4 text-center z-50">
-        Mobile devices are not currently supported. Please use a laptop or
-        desktop.
-      </div>
-    );
-  }
+  const commonProps = {
+    options,
+    bathrooms,
+    bedrooms,
+    region,
+    sqft,
+    loading,
+    error,
+    result,
+    onBathroomsChange: setBathrooms,
+    onBedroomsChange: setBedrooms,
+    onSqftChange: setSqft,
+    onRegionChange: setRegion,
+    onSubmit: handlePredict,
+    usStates,
+    selectedState,
+    setSelectedState,
+  };
+
   return (
     <>
       <section className="relative hero w-full">
         <div className="overlay">
-          <div className="text-white px-24">
-            <h1 className="title mt-24 font-semibold">
+          <div className="text-white px-4 md:px-24">
+            <h1 className="title mt-64 md:mt-24 font-semibold">
               Predict rent prices for apartments
             </h1>
             <p className="subtitle">
@@ -171,50 +172,46 @@ export default function Home() {
             </p>
             <div
               className="absolute left-1/2 transform -translate-x-1/2 top-[calc(70vh-2.25rem)]
- flex justify-center items-center w-full "
+ flex justify-center items-center w-full"
             >
-              <SearchForm
-                options={options}
-                bathrooms={bathrooms}
-                bedrooms={bedrooms}
-                region={region}
-                sqft={sqft}
-                loading={loading}
-                error={error}
-                result={result}
-                onBathroomsChange={setBathrooms}
-                onBedroomsChange={setBedrooms}
-                onSqftChange={setSqft}
-                onRegionChange={setRegion}
-                onSubmit={handlePredict}
-                usStates={usStates}
-                selectedState={selectedState}
-                setSelectedState={setSelectedState}
-              />
+              {/* Desktop Form - Hidden on Mobile */}
+              <div className="hidden md:block">
+                <SearchForm {...commonProps} />
+              </div>
+
+              {/* Mobile Form - Hidden on Desktop */}
+              <div className="block md:hidden">
+                <MobileSearchForm {...commonProps} />
+              </div>
             </div>
           </div>
           <div className=""></div>
         </div>
       </section>
       {result?.prediction[0] && (
-        <section className="mt-10 px-24 font-semibold py-10 text-lg text-gray-800 text-center">
-          <p>
-            Based on your input, the estimated monthly rent for an apartment
-            with{" "}
-            <strong>
-              {bedrooms?.label} {bedrooms?.label === 1 ? "bedroom" : "bedrooms"}
-            </strong>
-            ,{" "}
-            <strong>
-              {bathrooms?.label}{" "}
-              {bathrooms?.label === 1 ? "bathroom" : "bathrooms"}
-            </strong>
-            , and <strong>{sqft} square feet</strong> located in{" "}
-            <strong>{selectedState?.label}</strong> is:
-          </p>
-          <span className="text-xl border-l-2 pl-2 w-auto border-green-600">
-            ${result.prediction[0].toLocaleString()} / month
-          </span>
+        <section className="mt-8 md:mt-10 px-4 md:px-24 font-semibold py-8 md:py-10 text-lg text-gray-800 text-center">
+          <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-lg p-6 md:p-8">
+            <p className="mb-6">
+              Based on your input, the estimated monthly rent for an apartment
+              with{" "}
+              <strong>
+                {bedrooms?.label}{" "}
+                {bedrooms?.label === 1 ? "bedroom" : "bedrooms"}
+              </strong>
+              ,{" "}
+              <strong>
+                {bathrooms?.label}{" "}
+                {bathrooms?.label === 1 ? "bathroom" : "bathrooms"}
+              </strong>
+              , and <strong>{sqft} square feet</strong> located in{" "}
+              <strong>{selectedState?.label}</strong> is:
+            </p>
+            <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-xl p-6 border border-green-200">
+              <span className="text-2xl md:text-3xl font-bold text-green-600 border-l-4 pl-4 border-green-600">
+                ${result.prediction[0].toLocaleString()} / month
+              </span>
+            </div>
+          </div>
         </section>
       )}
     </>
