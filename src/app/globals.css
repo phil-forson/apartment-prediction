@@ -64,6 +64,7 @@ input[type="email"],
 input[type="tel"],
 select,
 textarea {
+  font-size: 18px !important;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
