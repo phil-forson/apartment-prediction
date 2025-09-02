@@ -185,7 +185,7 @@ export default function Home() {
               number of rooms and square footage.
             </p>
             <div
-              className="absolute left-1/2 transform -translate-x-1/2 top-[calc(70vh-2.25rem)]
+              className="absolute left-1/2 transform -translate-x-1/2 top-[calc(var(--hero-height)-var(--search-height))]
  flex justify-center items-center w-full px-4"
             >
               {/* Desktop Form - Hidden on Mobile */}
