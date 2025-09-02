@@ -45,8 +45,7 @@
 /* Mobile-specific adjustments */
 @media (max-width: 768px) {
   .hero {
-    height: 80vh;
-    min-height: 600px;
+    height: 60vh;
   }
 
   :root {
