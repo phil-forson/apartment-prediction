@@ -1,5 +1,15 @@
 @import "tailwindcss";
 
+:root {
+  --color-primary: #000000;
+  --color-secondary: #000000;
+  --color-tertiary: #000000;
+  --color-quaternary: #000000;
+  --color-quinary: #000000;
+  --hero-height: 70vh;
+  --search-height: 2.25rem;
+}
+
 .hero {
   position: relative;
   height: 70vh;
@@ -36,7 +46,11 @@
 @media (max-width: 768px) {
   .hero {
     height: 60vh;
-    min-height: 600px;
+  }
+
+  :root {
+    --hero-height: 60vh;
+    --search-height: 13rem;
   }
   
   .overlay {

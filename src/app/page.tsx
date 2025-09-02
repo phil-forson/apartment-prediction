@@ -171,7 +171,7 @@ export default function Home() {
               number of rooms and square footage.
             </p>
             <div
-              className="absolute left-1/2 transform -translate-x-1/2 top-[calc(70vh-2.25rem)]
+              className="absolute left-1/2 transform -translate-x-1/2 top-[calc(var(--hero-height)-var(--search-height))]
  flex justify-center items-center w-full"
             >
               {/* Desktop Form - Hidden on Mobile */}
@@ -189,7 +189,7 @@ export default function Home() {
         </div>
       </section>
       {result?.prediction[0] && (
-        <section className="mt-24 md:mt-10 px-4 md:px-24 font-semibold py-8 md:py-10 text-lg text-gray-800 text-center">
+        <section className="mt-32 md:mt-10 px-4 md:px-24 font-semibold py-8 md:py-10 text-lg text-gray-800 text-center">
           <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-lg p-6 md:p-8">
             <p className="mb-6">
               Based on your input, the estimated monthly rent for an apartment
