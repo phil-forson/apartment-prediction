@@ -250,7 +250,8 @@ const MobileSearchForm = ({
           <input
             type="number"
             placeholder="Enter square footage"
-            className="w-full border-none focus:border-none outline-0 py-2 px-4 text-base"
+            className="w-full border-none focus:border-none outline-0 py-2 px-4 text-lg"
+            style={{ fontSize: "18px" }}
             value={sqft}
             onChange={(e) => onSqftChange(e.target.value)}
             min={100}

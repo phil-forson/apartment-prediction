@@ -45,17 +45,30 @@
 /* Mobile-specific adjustments */
 @media (max-width: 768px) {
   .hero {
-    height: 60vh;
+    height: 80vh;
+    min-height: 600px;
   }
 
   :root {
     --hero-height: 60vh;
     --search-height: 13rem;
   }
-  
-  .overlay {
+    .overlay {
     background: rgba(0,0,0,0.5);
   }
+}
+
+/* Prevent zoom on input focus */
+input[type="number"],
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+select,
+textarea {
+  font-size: 18px !important;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
 
