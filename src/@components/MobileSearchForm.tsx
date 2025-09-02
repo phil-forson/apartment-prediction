@@ -63,7 +63,7 @@ const MobileSearchForm = ({
                 border: "0px solid #E2E8F0",
                 paddingVertical: "8px",
                 paddingHorizontal: "20px",
-                fontSize: "0.875rem",
+                fontSize: "1rem",
                 lineHeight: "1.25rem",
                 boxShadow: "none",
                 ":hover": {
@@ -128,7 +128,7 @@ const MobileSearchForm = ({
                 border: "0px solid #E2E8F0",
                 paddingVertical: "8px",
                 paddingHorizontal: "20px",
-                fontSize: "0.875rem",
+                fontSize: "1rem",
                 lineHeight: "1.25rem",
                 boxShadow: "none",
                 ":hover": {
@@ -193,7 +193,7 @@ const MobileSearchForm = ({
                 border: "0px solid #E2E8F0",
                 paddingVertical: "8px",
                 paddingHorizontal: "20px",
-                fontSize: "0.875rem",
+                fontSize: "1rem",
                 lineHeight: "1.25rem",
                 boxShadow: "none",
                 ":hover": {
@@ -250,7 +250,7 @@ const MobileSearchForm = ({
           <input
             type="number"
             placeholder="Enter square footage"
-            className="w-full border-none focus:border-none outline-0 py-2 px-2 text-sm"
+            className="w-full border-none focus:border-none outline-0 py-2 px-2 text-base"
             value={sqft}
             onChange={(e) => onSqftChange(e.target.value)}
             min={100}
