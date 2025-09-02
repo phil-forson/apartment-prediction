@@ -4,7 +4,7 @@ import apartmentPic from "/apartment.jpg";
 import Select, { SingleValue } from "react-select";
 import SearchForm from "@/@components/SearchForm";
 import MobileSearchForm from "@/@components/MobileSearchForm";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const stateToRegion: { [key: string]: string } = {
   Alabama: "South",
@@ -90,6 +90,8 @@ export default function Home() {
   const [selectedState, setSelectedState] =
     useState<SingleValue<{ label: string; value: string }>>(null);
 
+  const predictionRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     if (!bathrooms || !bedrooms || !sqft || !selectedState) {
       return;
@@ -97,6 +99,18 @@ export default function Home() {
     const hitEndpoint = async () => await handlePredict();
     hitEndpoint();
   }, [selectedState, bedrooms, bathrooms, sqft, region]);
+
+  // Auto-scroll to prediction when result is available
+  useEffect(() => {
+    if (result?.prediction[0] && predictionRef.current) {
+      setTimeout(() => {
+        predictionRef.current?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }, 100); // Small delay to ensure the result is rendered
+    }
+  }, [result]);
 
   // 3) handle submit (fetch through App Router API)
   const handlePredict = async (e?: React.FormEvent) => {
@@ -163,7 +177,7 @@ export default function Home() {
       <section className="relative hero w-full">
         <div className="overlay">
           <div className="text-white px-4 md:px-24">
-            <h1 className="title mt-24 font-semibold">
+            <h1 className="title mt-16 md:mt-24 font-semibold">
               Predict rent prices for apartments
             </h1>
             <p className="subtitle">
@@ -171,8 +185,8 @@ export default function Home() {
               number of rooms and square footage.
             </p>
             <div
-              className="absolute left-1/2 transform -translate-x-1/2 top-[calc(var(--hero-height)-var(--search-height))]
- flex justify-center items-center w-full"
+              className="absolute left-1/2 transform -translate-x-1/2 top-[calc(70vh-2.25rem)]
+ flex justify-center items-center w-full px-4"
             >
               {/* Desktop Form - Hidden on Mobile */}
               <div className="hidden md:block">
@@ -189,7 +203,10 @@ export default function Home() {
         </div>
       </section>
       {result?.prediction[0] && (
-        <section className="mt-32 md:mt-10 px-4 md:px-24 font-semibold py-8 md:py-10 text-lg text-gray-800 text-center">
+        <section
+          ref={predictionRef}
+          className="mt-8 md:mt-10 px-4 md:px-24 font-semibold py-8 md:py-10 text-lg text-gray-800 text-center"
+        >
           <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-lg p-6 md:p-8">
             <p className="mb-6">
               Based on your input, the estimated monthly rent for an apartment
