@@ -256,7 +256,7 @@ const SearchForm = ({
           <input
             type="number"
             placeholder="Enter square footage"
-            className="border-none focus:border-none outline-0"
+            className="border-none focus:border-none outline-0 text-sm"
             value={sqft}
             onChange={(e) => onSqftChange(e.target.value)}
             min={100}

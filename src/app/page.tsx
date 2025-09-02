@@ -205,7 +205,7 @@ export default function Home() {
       {result?.prediction[0] && (
         <section
           ref={predictionRef}
-          className="mt-8 md:mt-10 px-4 md:px-24 font-semibold py-8 md:py-10 text-lg text-gray-800 text-center"
+          className="mt-48 md:mt-10 px-4 md:px-24 font-semibold py-8 md:py-10 text-lg text-gray-800 text-center"
         >
           <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-lg p-6 md:p-8">
             <p className="mb-6">
