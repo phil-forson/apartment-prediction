@@ -245,7 +245,7 @@ const MobileSearchForm = ({
         </div>
       </div>
       <div className="border-b border-[#E2E8F0] py-3 px-4 flex flex-col">
-        <p className="text-xs text-slate-900 mb-1">Square foot</p>
+        <p className="text-xs px-2 text-slate-900 mb-1">Square foot</p>
         <div>
           <input
             type="number"
